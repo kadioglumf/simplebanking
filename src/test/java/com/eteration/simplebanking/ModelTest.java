@@ -5,10 +5,10 @@ package com.eteration.simplebanking;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.eteration.simplebanking.model.Account;
-import com.eteration.simplebanking.model.DepositTransaction;
 import com.eteration.simplebanking.model.InsufficientBalanceException;
-import com.eteration.simplebanking.model.WithdrawalTransaction;
 
+import com.eteration.simplebanking.model.transaction.DepositTransaction;
+import com.eteration.simplebanking.model.transaction.WithdrawalTransaction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -55,15 +55,15 @@ public class ModelTest {
 		assertTrue(account.getTransactions().size() == 0);
 
 		// Deposit Transaction
-		DepositTransaction depositTrx = new DepositTransaction(100);
-		assertTrue(depositTrx.getDate() != null);
+		DepositTransaction depositTrx = new DepositTransaction(100.0);
+		assertTrue(depositTrx.getTransactionDate() != null);
 		account.post(depositTrx);
 		assertTrue(account.getBalance() == 100);
 		assertTrue(account.getTransactions().size() == 1);
 
 		// Withdrawal Transaction
-		WithdrawalTransaction withdrawalTrx = new WithdrawalTransaction(60);
-		assertTrue(withdrawalTrx.getDate() != null);
+		WithdrawalTransaction withdrawalTrx = new WithdrawalTransaction(60.0);
+		assertTrue(withdrawalTrx.getTransactionDate() != null);
 		account.post(withdrawalTrx);
 		assertTrue(account.getBalance() == 40);
 		assertTrue(account.getTransactions().size() == 2);

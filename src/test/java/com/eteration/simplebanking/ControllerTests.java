@@ -6,11 +6,12 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import com.eteration.simplebanking.controller.AccountController;
-import com.eteration.simplebanking.controller.TransactionStatus;
+import com.eteration.simplebanking.dto.AccountDto;
 import com.eteration.simplebanking.model.Account;
-import com.eteration.simplebanking.model.DepositTransaction;
 import com.eteration.simplebanking.model.InsufficientBalanceException;
-import com.eteration.simplebanking.model.WithdrawalTransaction;
+import com.eteration.simplebanking.model.TransactionStatus;
+import com.eteration.simplebanking.model.transaction.DepositTransaction;
+import com.eteration.simplebanking.model.transaction.WithdrawalTransaction;
 import com.eteration.simplebanking.services.AccountService;
 
 import org.junit.jupiter.api.Assertions;
@@ -83,10 +84,10 @@ class ControllerTests  {
     public void givenId_GetAccount_thenReturnJson()
     throws Exception {
         
-        Account account = new Account("Kerem Karaca", "17892");
+        AccountDto account = new AccountDto("Kerem Karaca", "17892");
 
         doReturn(account).when(service).findAccount( "17892");
-        ResponseEntity<Account> result = controller.getAccount( "17892");
+        ResponseEntity<AccountDto> result = controller.getAccount( "17892");
         verify(service, times(1)).findAccount("17892");
         assertEquals(account, result.getBody());
     }
